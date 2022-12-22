@@ -1319,7 +1319,7 @@
       });
     } else if (typeof require !== 'undefined') {
       // Node.js.
-      crypto = require('expo-randombytes');
+      crypto = require('@dreamoslib/expo-random-bytes');
       if (crypto && crypto.randomBytes) {
         nacl.setPRNG(function (x, n) {
           var i,

@@ -18,6 +18,14 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
+"@dreamoslib/expo-random-bytes@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@dreamoslib/expo-random-bytes/-/expo-random-bytes-0.1.0.tgz#f538c933662c52056ec7477c12ae803b38522848"
+  integrity sha512-+xqFLpp+85WeRQLj11FmrtEMps9acwf+atyag9rFmZBVFTwZLPyhbs5FJSyOWSnF6t6bzS4V2jb78bgSsWKIPQ==
+  dependencies:
+    expo-random "^13.0.0"
+    typedarray-to-buffer "^4.0.0"
+
 JSONStream@^1.0.3:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-1.3.5.tgz#3208c1f08d3a4d99261ab64f92302bc15e111ca0"
@@ -756,19 +764,12 @@ evp_bytestokey@^1.0.0, evp_bytestokey@^1.0.3:
     md5.js "^1.3.4"
     safe-buffer "^5.1.1"
 
-expo-random@^10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/expo-random/-/expo-random-10.0.0.tgz#68e9e46a7025918e13a80e655a9a0c2b60d0b9e7"
-  integrity sha512-7x0fDAZGDUUVhlfZ3lbYIfSYb6TIPq0VglbDRXvAZjvfHgefbCW2/+iZWTDYNA0ZOtzoM5dwWg4Z5fiXuAdsrQ==
+expo-random@^13.0.0:
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/expo-random/-/expo-random-13.0.0.tgz#fc9c1496ac9f7555563d86de0db25966739c028f"
+  integrity sha512-aGb0vtUmFFuW0TF1rdOgsz89zEVD/RXUPUnnZy5+i3jJeQ2PerJ4uo72/EuWqHpCBNto8/qT+aCzFinmQDeTAA==
   dependencies:
     base64-js "^1.3.0"
-
-expo-randombytes@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/expo-randombytes/-/expo-randombytes-1.0.1.tgz#898ae397e3c070841d9437921cc6a2c78dcce30a"
-  integrity sha512-39ndAlIyAeKY2i3lqdBriCiWIHYiavBLwNLCYlsJxdq8e9ByHQ6Ke83nodJRkURE0MO3g6SVyNktXmF+P3p4zQ==
-  dependencies:
-    expo-random "^10.0.0"
 
 external-editor@^3.0.3:
   version "3.1.0"
@@ -1987,6 +1988,11 @@ type-fest@^0.8.1:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
+
+typedarray-to-buffer@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/typedarray-to-buffer/-/typedarray-to-buffer-4.0.0.tgz#cdd2933c61dd3f5f02eda5d012d441f95bfeb50a"
+  integrity sha512-6dOYeZfS3O9RtRD1caom0sMxgK59b27+IwoNy8RDPsmslSGOyU+mpTamlaIW7aNKi90ZQZ9DFaZL3YRoiSCULQ==
 
 typedarray@^0.0.6:
   version "0.0.6"
