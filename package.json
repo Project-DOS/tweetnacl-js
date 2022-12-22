@@ -1,6 +1,6 @@
 {
   "name": "@dreamoslib/tweetnacl",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Port of TweetNaCl cryptographic library to JavaScript",
   "main": "nacl-fast.js",
   "types": "nacl.d.ts",
@@ -43,5 +43,8 @@
   "browser": {
     "buffer": false,
     "crypto": false
+  },
+  "dependencies": {
+    "expo-randombytes": "^1.0.1"
   }
 }

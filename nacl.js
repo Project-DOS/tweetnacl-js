@@ -1,5 +1,5 @@
 (function (nacl) {
-  "use strict";
+  'use strict';
 
   // Ported in 2014 by Dmitry Chestnykh and Devi Mandiri.
   // Public domain.
@@ -20,7 +20,7 @@
 
   //  Pluggable, initialized in high-level API below.
   var randombytes = function (/* x, n */) {
-    throw new Error("no PRNG");
+    throw new Error('no PRNG');
   };
 
   var _0 = new Uint8Array(16);
@@ -1085,22 +1085,22 @@
   /* High-level API */
 
   function checkLengths(k, n) {
-    if (k.length !== crypto_secretbox_KEYBYTES) throw new Error("bad key size");
+    if (k.length !== crypto_secretbox_KEYBYTES) throw new Error('bad key size');
     if (n.length !== crypto_secretbox_NONCEBYTES)
-      throw new Error("bad nonce size");
+      throw new Error('bad nonce size');
   }
 
   function checkBoxLengths(pk, sk) {
     if (pk.length !== crypto_box_PUBLICKEYBYTES)
-      throw new Error("bad public key size");
+      throw new Error('bad public key size');
     if (sk.length !== crypto_box_SECRETKEYBYTES)
-      throw new Error("bad secret key size");
+      throw new Error('bad secret key size');
   }
 
   function checkArrayTypes() {
     for (var i = 0; i < arguments.length; i++) {
       if (!(arguments[i] instanceof Uint8Array))
-        throw new TypeError("unexpected type, use Uint8Array");
+        throw new TypeError('unexpected type, use Uint8Array');
     }
   }
 
@@ -1144,8 +1144,8 @@
   nacl.scalarMult = function (n, p) {
     checkArrayTypes(n, p);
     if (n.length !== crypto_scalarmult_SCALARBYTES)
-      throw new Error("bad n size");
-    if (p.length !== crypto_scalarmult_BYTES) throw new Error("bad p size");
+      throw new Error('bad n size');
+    if (p.length !== crypto_scalarmult_BYTES) throw new Error('bad p size');
     var q = new Uint8Array(crypto_scalarmult_BYTES);
     crypto_scalarmult(q, n, p);
     return q;
@@ -1154,7 +1154,7 @@
   nacl.scalarMult.base = function (n) {
     checkArrayTypes(n);
     if (n.length !== crypto_scalarmult_SCALARBYTES)
-      throw new Error("bad n size");
+      throw new Error('bad n size');
     var q = new Uint8Array(crypto_scalarmult_BYTES);
     crypto_scalarmult_base(q, n);
     return q;
@@ -1195,7 +1195,7 @@
   nacl.box.keyPair.fromSecretKey = function (secretKey) {
     checkArrayTypes(secretKey);
     if (secretKey.length !== crypto_box_SECRETKEYBYTES)
-      throw new Error("bad secret key size");
+      throw new Error('bad secret key size');
     var pk = new Uint8Array(crypto_box_PUBLICKEYBYTES);
     crypto_scalarmult_base(pk, secretKey);
     return { publicKey: pk, secretKey: new Uint8Array(secretKey) };
@@ -1210,7 +1210,7 @@
   nacl.sign = function (msg, secretKey) {
     checkArrayTypes(msg, secretKey);
     if (secretKey.length !== crypto_sign_SECRETKEYBYTES)
-      throw new Error("bad secret key size");
+      throw new Error('bad secret key size');
     var signedMsg = new Uint8Array(crypto_sign_BYTES + msg.length);
     crypto_sign(signedMsg, msg, msg.length, secretKey);
     return signedMsg;
@@ -1219,7 +1219,7 @@
   nacl.sign.open = function (signedMsg, publicKey) {
     checkArrayTypes(signedMsg, publicKey);
     if (publicKey.length !== crypto_sign_PUBLICKEYBYTES)
-      throw new Error("bad public key size");
+      throw new Error('bad public key size');
     var tmp = new Uint8Array(signedMsg.length);
     var mlen = crypto_sign_open(tmp, signedMsg, signedMsg.length, publicKey);
     if (mlen < 0) return null;
@@ -1237,9 +1237,9 @@
 
   nacl.sign.detached.verify = function (msg, sig, publicKey) {
     checkArrayTypes(msg, sig, publicKey);
-    if (sig.length !== crypto_sign_BYTES) throw new Error("bad signature size");
+    if (sig.length !== crypto_sign_BYTES) throw new Error('bad signature size');
     if (publicKey.length !== crypto_sign_PUBLICKEYBYTES)
-      throw new Error("bad public key size");
+      throw new Error('bad public key size');
     var sm = new Uint8Array(crypto_sign_BYTES + msg.length);
     var m = new Uint8Array(crypto_sign_BYTES + msg.length);
     var i;
@@ -1258,7 +1258,7 @@
   nacl.sign.keyPair.fromSecretKey = function (secretKey) {
     checkArrayTypes(secretKey);
     if (secretKey.length !== crypto_sign_SECRETKEYBYTES)
-      throw new Error("bad secret key size");
+      throw new Error('bad secret key size');
     var pk = new Uint8Array(crypto_sign_PUBLICKEYBYTES);
     for (var i = 0; i < pk.length; i++) pk[i] = secretKey[32 + i];
     return { publicKey: pk, secretKey: new Uint8Array(secretKey) };
@@ -1266,7 +1266,7 @@
 
   nacl.sign.keyPair.fromSeed = function (seed) {
     checkArrayTypes(seed);
-    if (seed.length !== crypto_sign_SEEDBYTES) throw new Error("bad seed size");
+    if (seed.length !== crypto_sign_SEEDBYTES) throw new Error('bad seed size');
     var pk = new Uint8Array(crypto_sign_PUBLICKEYBYTES);
     var sk = new Uint8Array(crypto_sign_SECRETKEYBYTES);
     for (var i = 0; i < 32; i++) sk[i] = seed[i];
@@ -1304,7 +1304,7 @@
     // Initialize PRNG if environment provides CSPRNG.
     // If not, methods calling randombytes will throw.
     var crypto =
-      typeof self !== "undefined" ? self.crypto || self.msCrypto : null;
+      typeof self !== 'undefined' ? self.crypto || self.msCrypto : null;
     if (crypto && crypto.getRandomValues) {
       // Browsers.
       var QUOTA = 65536;
@@ -1317,10 +1317,21 @@
         for (i = 0; i < n; i++) x[i] = v[i];
         cleanup(v);
       });
+    } else if (typeof require !== 'undefined') {
+      // Node.js.
+      crypto = require('expo-randombytes');
+      if (crypto && crypto.randomBytes) {
+        nacl.setPRNG(function (x, n) {
+          var i,
+            v = crypto.randomBytes(n);
+          for (i = 0; i < n; i++) x[i] = v[i];
+          cleanup(v);
+        });
+      }
     }
   })();
 })(
-  typeof module !== "undefined" && module.exports
+  typeof module !== 'undefined' && module.exports
     ? module.exports
     : (self.nacl = self.nacl || {})
 );
