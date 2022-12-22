@@ -1,6 +1,6 @@
 {
-  "name": "tweetnacl",
-  "version": "1.0.3",
+  "name": "@dreamoslib/tweetnacl",
+  "version": "0.1.0",
   "description": "Port of TweetNaCl cryptographic library to JavaScript",
   "main": "nacl-fast.js",
   "types": "nacl.d.ts",
@@ -16,10 +16,6 @@
     "bench": "node test/benchmark/bench.js",
     "lint": "eslint nacl.js nacl-fast.js test/*.js test/benchmark/*.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/dchest/tweetnacl-js.git"
-  },
   "keywords": [
     "crypto",
     "cryptography",
@@ -34,12 +30,7 @@
     "salsa20",
     "signatures"
   ],
-  "author": "TweetNaCl-js contributors",
   "license": "Unlicense",
-  "bugs": {
-    "url": "https://github.com/dchest/tweetnacl-js/issues"
-  },
-  "homepage": "https://tweetnacl.js.org",
   "devDependencies": {
     "browserify": "^16.2.3",
     "eslint": "^6.8.0",
